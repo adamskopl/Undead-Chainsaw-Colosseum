@@ -14,7 +14,34 @@ const CUSTOM_TYPES = [
   }],
 ];
 
-export { checkArgs, debugError };
+export { checkArgs, debugError, once, onceLog };
+
+/**
+ * https://davidwalsh.name/javascript-once
+ * var canOnlyFireOnce = once(function() {
+ * console.log('Fired!');
+ * });
+ * canOnlyFireOnce(); // "Fired!"
+ * canOnlyFireOnce(); // nada
+ */
+function once(fn, context) {
+  let result;
+  return function () {
+    if (fn) {
+      result = fn.apply(context || this, arguments);
+      fn = null;
+    }
+    return result;
+  };
+}
+
+/**
+ * const l = onceLog('seen once');
+ * l();
+ */
+function onceLog(mess) {
+  return once(console.log.bind(null, mess));
+}
 
 function debugError(e) {
   console.error(e);
