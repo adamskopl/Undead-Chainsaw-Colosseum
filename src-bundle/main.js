@@ -1,2 +1,2 @@
-import 'phaser';
-import 'ramda';
+import 'tween';
+import 'victor';

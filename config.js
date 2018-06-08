@@ -18,10 +18,8 @@ System.config({
     "babel-runtime": "npm:babel-runtime@5.8.38",
     "core-js": "npm:core-js@1.2.7",
     "glob": "npm:glob@7.1.2",
-    "phaser": "github:photonstorm/phaser-ce@2.10.3",
-    "photonstorm/phaser-ce": "github:photonstorm/phaser-ce@2.10.3",
-    "ramda": "npm:ramda@0.25.0",
     "tape": "npm:tape@4.9.0",
+    "tween": "npm:@tweenjs/tween.js@17.2.0",
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.4.1"
     },
@@ -46,6 +44,9 @@ System.config({
     "github:jspm/nodelibs-vm@0.1.0": {
       "vm-browserify": "npm:vm-browserify@0.0.4"
     },
+    "npm:@tweenjs/tween.js@17.2.0": {
+      "process": "github:jspm/nodelibs-process@0.1.2"
+    },
     "npm:assert@1.4.1": {
       "assert": "github:jspm/nodelibs-assert@0.1.0",
       "buffer": "github:jspm/nodelibs-buffer@0.1.1",
@@ -60,7 +61,7 @@ System.config({
       "concat-map": "npm:concat-map@0.0.1"
     },
     "npm:buffer@5.1.0": {
-      "base64-js": "npm:base64-js@1.2.3",
+      "base64-js": "npm:base64-js@1.3.0",
       "ieee754": "npm:ieee754@1.1.11"
     },
     "npm:core-js@1.2.7": {
@@ -118,9 +119,6 @@ System.config({
       "process": "github:jspm/nodelibs-process@0.1.2",
       "wrappy": "npm:wrappy@1.0.2"
     },
-    "npm:inherits@2.0.1": {
-      "util": "github:jspm/nodelibs-util@0.1.0"
-    },
     "npm:inherits@2.0.3": {
       "util": "github:jspm/nodelibs-util@0.1.0"
     },
@@ -155,9 +153,6 @@ System.config({
       "assert": "github:jspm/nodelibs-assert@0.1.0",
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "vm": "github:jspm/nodelibs-vm@0.1.0"
-    },
-    "npm:ramda@0.25.0": {
-      "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:readable-stream@1.1.14": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.1",
@@ -217,7 +212,7 @@ System.config({
       "stream": "github:jspm/nodelibs-stream@0.1.0"
     },
     "npm:util@0.10.3": {
-      "inherits": "npm:inherits@2.0.1",
+      "inherits": "npm:inherits@2.0.3",
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:vm-browserify@0.0.4": {

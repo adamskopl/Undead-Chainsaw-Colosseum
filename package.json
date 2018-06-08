@@ -38,14 +38,14 @@
   "jspm": {
     "dependencies": {
       "glob": "npm:glob@^7.1.2",
-      "photonstorm/phaser-ce": "github:photonstorm/phaser-ce@^2.10.0",
-      "ramda": "npm:ramda@^0.25.0",
-      "tape": "npm:tape@^4.9.0"
+      "tape": "npm:tape@^4.9.0",
+      "tween": "npm:@tweenjs/tween.js@^17.2.0"
     },
     "devDependencies": {
       "babel": "npm:babel-core@^5.8.24",
       "babel-runtime": "npm:babel-runtime@^5.8.24",
       "core-js": "npm:core-js@^1.1.4"
     }
-  }
+  },
+  "dependencies": {}
 }
