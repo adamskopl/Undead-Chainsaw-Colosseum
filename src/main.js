@@ -32,19 +32,19 @@ function onDown(e) {
   switch (e.keyCode) {
     case 38: // up
     case 87: // w
-
+    objects[0].dirRequest = { x: 0, y: -1 };
       break;
     case 39: // right
     case 68: // d
-
+    objects[0].dirRequest = { x: 1, y: 0 };
       break;
     case 40: // down
     case 83: // s
-
+    objects[0].dirRequest = { x: 0, y: 1 };
       break;
     case 37: // left
     case 65: // a
-
+    objects[0].dirRequest = { x: -1, y: 0 };
       break;
     default:
   }

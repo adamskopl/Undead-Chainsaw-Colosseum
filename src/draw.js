@@ -2,9 +2,9 @@ import T from 'tween';
 import m from './math';
 import { getObjectMap } from './objects';
 
-const SPEED = 300;
+const SPEED = 200;
 // TEST FOR DIFFERENT GRAVS
-const GRAV = { x: 0, y: 1 };
+const GRAV = { x: 1, y: 0 };
 
 export function draw(ctx, objects, OBJECT_SIZE) {
   ctx.fillStyle = 'black';
@@ -22,18 +22,28 @@ export function draw(ctx, objects, OBJECT_SIZE) {
   });
 }
 
-function applyGravity(OBJECTS) {
+// check if object can move in a given direction
+function canMove(o, dir, objectsMap) {
+  let targetPos = { x: o.pos.x + dir.x, y: o.pos.y + dir.y };
+  return (objectsMap.get(targetPos.x) ?
+    objectsMap.get(targetPos.x).get(targetPos.y) :
+    undefined) === undefined;
+}
+
+function applyDir(OBJECTS) {
   const objectsMap = getObjectMap(OBJECTS);
   OBJECTS.forEach(function (o) {
     if (o.moves === false) {
       return;
     }
-    if (objectsMap.get(o.pos.x).get(o.pos.y + 1) === undefined) {
+    if (canMove(o, GRAV, objectsMap)) {
       o.dir = GRAV;
-    } else {
-      if (o.dirRequest !== null) {
-        o.dir = o.dirRequest;
-      }
+    } else if (
+      o.dirRequest !== null
+      && !m.equal(m.neg(o.dirRequest), GRAV)
+      && canMove(o, o.dirRequest, objectsMap)
+    ) {
+      o.dir = o.dirRequest;
     }
   });
 }
@@ -53,7 +63,7 @@ export function moveObject(o) {
 
 
 export function moveAll(objects) {
-  applyGravity(objects);
+  applyDir(objects);
 
   // so there's always a tween for the movement tick
   const promiseTick = new Promise(function promiseTick(res) {
@@ -70,6 +80,7 @@ export function moveAll(objects) {
         .filter(o => o !== null)
         .forEach(function forObjectMoveDone(o) {
           o.dir = null;
+          o.dirRequest = null;
         });
     });
 }

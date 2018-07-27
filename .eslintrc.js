@@ -16,6 +16,7 @@ module.exports = {
     'no-console': 'off',
     'prefer-arrow-callback': 'off',
     'function-paren-newline': ['error', 'consistent'],
+    'prefer-const': 'off',
   },
   'globals': {
     'Phaser': true

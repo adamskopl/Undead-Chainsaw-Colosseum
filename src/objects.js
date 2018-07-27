@@ -1,8 +1,33 @@
 export const objects = [
-  { pos: { x: 10, y: 5 }, moves: true, dir: null, dirRequest: { x: 1, y: 0 } },
-  { pos: { x: 10, y: 7 }, moves: true, dir: null, dirRequest: { x: 1, y: 0 } },
-  { pos: { x: 10, y: 8 }, moves: false, dir: null, dirRequest: null },
+
+  { pos: { x: 6, y: 12 }, moves: true, dir: null, dirRequest: null },
+
+  { pos: { x: 10, y: 10 }, moves: false, dir: null, dirRequest: null },
   { pos: { x: 11, y: 10 }, moves: false, dir: null, dirRequest: null },
+  { pos: { x: 12, y: 10 }, moves: false, dir: null, dirRequest: null },
+  { pos: { x: 13, y: 10 }, moves: false, dir: null, dirRequest: null },
+  { pos: { x: 14, y: 10 }, moves: false, dir: null, dirRequest: null },
+
+  { pos: { x: 12, y: 15 }, moves: false, dir: null, dirRequest: null },
+  { pos: { x: 13, y: 15 }, moves: false, dir: null, dirRequest: null },
+  { pos: { x: 14, y: 15 }, moves: false, dir: null, dirRequest: null },
+  { pos: { x: 15, y: 15 }, moves: false, dir: null, dirRequest: null },
+  { pos: { x: 16, y: 15 }, moves: false, dir: null, dirRequest: null },
+
+
+  { pos: { x: 8, y: 8 }, moves: false, dir: null, dirRequest: null },
+  { pos: { x: 8, y: 9 }, moves: false, dir: null, dirRequest: null },
+  { pos: { x: 8, y: 10 }, moves: false, dir: null, dirRequest: null },
+  { pos: { x: 8, y: 11 }, moves: false, dir: null, dirRequest: null },
+  { pos: { x: 8, y: 12 }, moves: false, dir: null, dirRequest: null },
+
+
+  { pos: { x: 16, y: 9 }, moves: false, dir: null, dirRequest: null },
+  { pos: { x: 16, y: 10 }, moves: false, dir: null, dirRequest: null },
+  { pos: { x: 16, y: 11 }, moves: false, dir: null, dirRequest: null },
+  { pos: { x: 16, y: 12 }, moves: false, dir: null, dirRequest: null },
+  { pos: { x: 16, y: 13 }, moves: false, dir: null, dirRequest: null },
+
 ];
 
 export function getObjectMap(objs) {
