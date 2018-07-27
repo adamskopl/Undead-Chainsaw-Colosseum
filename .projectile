@@ -8,3 +8,8 @@
 -/src/phaser-examples
 -/demos
 -/phaser-examples
+-/package.json
+-/package-lock.json
+-/gulp
+-/.eslintrc.js
+-/gulpfile.js

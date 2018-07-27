@@ -1,2 +1,2 @@
 import 'tween';
-import 'victor';
+// import 'phaser/phaser';

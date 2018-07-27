@@ -20,6 +20,9 @@ module.exports = {
   'globals': {
     'Phaser': true
   },
+  'env': {
+    'browser': true,
+  },
   'plugins': [
     'import'
   ]

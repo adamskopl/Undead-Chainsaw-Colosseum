@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Undead Chainsaw Colosseum</title>
+    <style type="text/css">
+	   body{
+		   background: #96775a;
+		   padding: 0px;
+		   margin: 0px;
+	   }
+     #gameAreaParent {
+       position: relative;
+     }
+     #canvasGame {
+       position: absolute;
+       top: 50%;
+       left: 50%;
+       transform: translate(-50%, -50%);
+       /* width: 80%;
+          height: 80%; */
+       background: #FFFFFF;
+     }
+	  </style>
+
+    <script src="jspm_packages/system.js"></script>
+    <script src="config.js"></script>
+    <script src="imports-bundle.js"></script>
+
+    <script>
+     function init() {
+       window.Phaser = {}; // for phaser
+       window.PIXI = {}; // original phaser code uses PIXI object (see Point.js)
+       System.import('src-bundle/main.js')
+             .then(System.import('./dist/src/main.js'));
+     }
+    </script>
+
+  </head>
+
+  <body onload="init()">
+    <canvas id="canvasGame" width="500" height="500"></canvas>
+  </body>
+</html>
