@@ -1,10 +1,11 @@
 import T from 'tween';
 import m from './math';
 import { getObjectMap } from './objects';
+import { getPromiseTick, drawClock } from './clock';
 
-const SPEED = 200;
+const SPEED = 400;
 // TEST FOR DIFFERENT GRAVS
-const GRAV = { x: 1, y: 0 };
+const GRAV = { x: 0, y: 1 };
 
 export function draw(ctx, objects, OBJECT_SIZE) {
   ctx.fillStyle = 'black';
@@ -20,6 +21,8 @@ export function draw(ctx, objects, OBJECT_SIZE) {
     );
     ctx.restore();
   });
+
+  drawClock(ctx, OBJECT_SIZE);
 }
 
 // check if object can move in a given direction
@@ -39,9 +42,9 @@ function applyDir(OBJECTS) {
     if (canMove(o, GRAV, objectsMap)) {
       o.dir = GRAV;
     } else if (
-      o.dirRequest !== null
-      && !m.equal(m.neg(o.dirRequest), GRAV)
-      && canMove(o, o.dirRequest, objectsMap)
+      o.dirRequest !== null &&
+      !m.equal(m.neg(o.dirRequest), GRAV) &&
+      canMove(o, o.dirRequest, objectsMap)
     ) {
       o.dir = o.dirRequest;
     }
@@ -65,22 +68,16 @@ export function moveObject(o) {
 export function moveAll(objects) {
   applyDir(objects);
 
-  // so there's always a tween for the movement tick
-  const promiseTick = new Promise(function promiseTick(res) {
-    return new T.Tween(null)
-      .to(null, SPEED)
-      .onComplete(res)
-      .start();
-  });
-
   // launched when objects are ready to be moved
-  return Promise.all(objects.map(moveObject).concat(promiseTick))
-    .then(function onMovePromiseAll(objs) {
-      objs
-        .filter(o => o !== null)
-        .forEach(function forObjectMoveDone(o) {
-          o.dir = null;
-          o.dirRequest = null;
-        });
-    });
+  return Promise.all(
+    objects.map(moveObject)
+      .concat(getPromiseTick(SPEED))
+  ).then(function onMovePromiseAll(objs) {
+    objs
+      .filter(o => o !== null)
+      .forEach(function forObjectMoveDone(o) {
+        o.dir = null;
+        o.dirRequest = null;
+      });
+  });
 }

@@ -1,6 +1,7 @@
 export const objects = [
 
-  { pos: { x: 6, y: 12 }, moves: true, dir: null, dirRequest: null },
+  { pos: { x: 12, y: 9 }, moves: true, dir: null, dirRequest: { x: -1, y: 0}, },
+  { pos: { x: 10, y: 9 }, moves: true, dir: null, dirRequest: { x: 1, y: 0} },
 
   { pos: { x: 10, y: 10 }, moves: false, dir: null, dirRequest: null },
   { pos: { x: 11, y: 10 }, moves: false, dir: null, dirRequest: null },
@@ -29,6 +30,10 @@ export const objects = [
   { pos: { x: 16, y: 13 }, moves: false, dir: null, dirRequest: null },
 
 ];
+
+export function getPlayer() {
+  return objects[0];
+}
 
 export function getObjectMap(objs) {
   const map = new Map();
