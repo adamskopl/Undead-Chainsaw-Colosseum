@@ -17,6 +17,7 @@ module.exports = {
     'prefer-arrow-callback': 'off',
     'function-paren-newline': ['error', 'consistent'],
     'prefer-const': 'off',
+    'comma-dangle': 'off',
   },
   'globals': {
     'Phaser': true
