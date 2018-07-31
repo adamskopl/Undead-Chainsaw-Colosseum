@@ -47,6 +47,7 @@ function applyDir(OBJECTS) {
       canMove(o, o.dirRequest, objectsMap)
     ) {
       o.dir = o.dirRequest;
+      o.dirRequest = null;
     }
   });
 }
@@ -77,7 +78,6 @@ export function moveAll(objects) {
       .filter(o => o !== null)
       .forEach(function forObjectMoveDone(o) {
         o.dir = null;
-        o.dirRequest = null;
       });
   });
 }

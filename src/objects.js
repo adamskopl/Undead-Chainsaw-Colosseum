@@ -1,7 +1,7 @@
 export const objects = [
 
-  { pos: { x: 12, y: 9 }, moves: true, dir: null, dirRequest: { x: -1, y: 0}, },
-  { pos: { x: 10, y: 9 }, moves: true, dir: null, dirRequest: { x: 1, y: 0} },
+  { pos: { x: 12, y: 9 }, moves: true, dir: null, dirRequest: { x: -1, y: 0 }, },
+  { pos: { x: 10, y: 9 }, moves: true, dir: null, dirRequest: { x: 1, y: 0 } },
 
   { pos: { x: 10, y: 10 }, moves: false, dir: null, dirRequest: null },
   { pos: { x: 11, y: 10 }, moves: false, dir: null, dirRequest: null },
