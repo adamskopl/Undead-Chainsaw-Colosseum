@@ -1,20 +1,17 @@
 import T from 'tween';
-import m from './math';
-import { getObjectMap } from './objects';
+import Pnt from './point';
+import { getObjectsMap, getFieldsMultiRequestsMap } from './objects';
 import { getPromiseTick, drawClock } from './clock';
-
-const SPEED = 400;
-// TEST FOR DIFFERENT GRAVS
-const GRAV = { x: 0, y: 1 };
+import { createMapTwo } from './utils';
 
 export function draw(ctx, objects, OBJECT_SIZE) {
-  ctx.fillStyle = 'black';
+  ctx.fillStyle = 'white';
   ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
   ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
   objects.forEach(function (o) {
     ctx.save();
-    ctx.strokeStyle = o.moves ? 'white' : 'brown';
+    ctx.strokeStyle = o.moves ? 'black' : 'orange';
     ctx.strokeRect(
       o.pos.x * OBJECT_SIZE,
       o.pos.y * OBJECT_SIZE, OBJECT_SIZE, OBJECT_SIZE,
@@ -25,59 +22,49 @@ export function draw(ctx, objects, OBJECT_SIZE) {
   drawClock(ctx, OBJECT_SIZE);
 }
 
-// check if object can move in a given direction
-function canMove(o, dir, objectsMap) {
-  let targetPos = { x: o.pos.x + dir.x, y: o.pos.y + dir.y };
-  return (objectsMap.get(targetPos.x) ?
-    objectsMap.get(targetPos.x).get(targetPos.y) :
-    undefined) === undefined;
-}
+function moveObject(o) {
+  return new Promise(promiseMoveObj);
 
-function applyDir(OBJECTS) {
-  const objectsMap = getObjectMap(OBJECTS);
-  OBJECTS.forEach(function (o) {
-    if (o.moves === false) {
-      return;
-    }
-    if (canMove(o, GRAV, objectsMap)) {
-      o.dir = GRAV;
-    } else if (
-      o.dirRequest !== null &&
-      !m.equal(m.neg(o.dirRequest), GRAV) &&
-      canMove(o, o.dirRequest, objectsMap)
-    ) {
-      o.dir = o.dirRequest;
-      o.dirRequest = null;
-    }
-  });
-}
-
-export function moveObject(o) {
-  if (o.dir === null) {
-    return Promise.resolve(null);
-  }
-  return new Promise(function promiseMoveObj(res) {
+  function promiseMoveObj(res) {
     return new T.Tween(o.pos)
-      .to(m.add(o.pos, o.dir), SPEED)
+      .to(Pnt.add(o.pos, o.dir), SPEED)
       .easing(T.Easing.Cubic.In)
       .onComplete(res.bind(null, o))
       .start();
-  });
+  }
 }
 
+function getPositionsForcedByGravity(objectsMoving, objects) {
+  return objectsMoving
+    .reduce(reducer.bind(null, objects), []);
+  function reducer(objs, arr, o) {
+    if (canMove(o, GRAV, objs)) {
+      arr.push(o.pos);
+    }
+    return arr;
+  }
+}
 
-export function moveAll(objects) {
-  applyDir(objects);
-
-  // launched when objects are ready to be moved
-  return Promise.all(
-    objects.map(moveObject)
-      .concat(getPromiseTick(SPEED))
-  ).then(function onMovePromiseAll(objs) {
-    objs
-      .filter(o => o !== null)
-      .forEach(function forObjectMoveDone(o) {
-        o.dir = null;
-      });
+function getMoveDirections(objects) {
+  let objectsMoving = objects.filter(o => o.moves === true);
+  let gravDirs = getPositionsForcedByGravity(objectsMoving, objects);
+  return objectsMoving.map(function (o) {
+    return {
+      o,
+      dir: gravDirs.find(p => Pnt.equal(p, o.pos)) ? GRAV : o.dirRequest
+    };
   });
 }
+  // // launched when objects are ready to be moved
+  // return Promise.all(
+  //   objects
+  //   .filter(o => o.dir !== null)
+  //   .map(moveObject)
+  //   .concat(getPromiseTick(SPEED))
+  // ).then(function onMovePromiseAll(objs) {
+  //   objs
+  //     .filter(o => o !== null)
+  //     .forEach(function forObjectMoveDone(o) {
+  //       o.dir = null;
+  //     });
+  // });

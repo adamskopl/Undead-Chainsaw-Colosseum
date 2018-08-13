@@ -17,7 +17,7 @@ export function getPromiseTick(speed) {
 
 export function drawClock(ctx, size) {
   ctx.save();
-  ctx.strokeStyle = 'white';
+  ctx.strokeStyle = 'black';
   ctx.translate(ctx.canvas.width - (1.5 * size), 1.5 * size); // center
   ctx.rotate(Math.PI * rot.r);
   ctx.strokeRect(-size / 2, -size / 2, size, size);

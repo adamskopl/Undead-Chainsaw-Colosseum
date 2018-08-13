@@ -1,6 +1,7 @@
 import T from 'tween';
-import { draw, moveObject, moveAll } from './draw';
-import { objects, getPlayer } from './objects';
+import { draw } from './draw';
+import { objectsInitial, getPlayer } from './objects';
+import { getDirections } from './move';
 
 const OBJECT_SIZE = 20;
 
@@ -15,16 +16,17 @@ function init() {
 
   document.addEventListener('keydown', onDown);
 
-  moveIteration();
+  moveIteration(objectsInitial);
 }
 
-function moveIteration() {
-  moveAll(objects).then(moveIteration);
+function moveIteration(objects) {
+  const directions = getDirections(objects);
+  // console.table(directions);
 }
 
 function update(ctx, time) {
   T.update(time);
-  draw(ctx, objects, OBJECT_SIZE);
+  // draw(ctx, objects, OBJECT_SIZE);
   window.requestAnimationFrame(update.bind(null, ctx));
 }
 
@@ -32,19 +34,19 @@ function onDown(e) {
   switch (e.keyCode) {
     case 38: // up
     case 87: // w
-    getPlayer().dirRequest = { x: 0, y: -1 };
+    // getPlayer().dirRequest = { x: 0, y: -1 };
       break;
     case 39: // right
     case 68: // d
-    getPlayer().dirRequest = { x: 1, y: 0 };
+    // getPlayer().dirRequest = { x: 1, y: 0 };
       break;
     case 40: // down
     case 83: // s
-    getPlayer().dirRequest = { x: 0, y: 1 };
+    // getPlayer().dirRequest = { x: 0, y: 1 };
       break;
     case 37: // left
     case 65: // a
-    getPlayer().dirRequest = { x: -1, y: 0 };
+    // getPlayer().dirRequest = { x: -1, y: 0 };
       break;
     default:
   }

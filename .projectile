@@ -5,11 +5,9 @@
 -/.gitignore
 -/imports-bundle.js
 -/imports-bundle.js.map
--/src/phaser-examples
--/demos
--/phaser-examples
 -/package.json
 -/package-lock.json
 -/gulp
 -/.eslintrc.js
 -/gulpfile.js
+-/phaser
